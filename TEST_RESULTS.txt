@@ -1,0 +1,17 @@
+DPP-AUDIT RELEASE CANDIDATE — LOCAL BASELINE
+============================================
+Environment: Python 3.12-compatible source; executed with installed Pydantic 2.x.
+Command: python -m unittest discover -s tests -v
+Result: PASS — 21 tests, 0 failures.
+
+Command: python demo.py
+Result: PASS — synthetic example evaluated and JSON, CSV, and human-readable report generated.
+Overall status from synthetic demo: approved.
+
+Command: python -m compileall -q dpp_audit demo.py tests
+Result: PASS — no syntax/bytecode compilation errors.
+
+Scope warning: these are local baseline checks only. The Perplexity adapter tests use a
+recorded response and injected transport; no live API request was made. The demo uses
+synthetic evidence and example.invalid. Passing tests do not establish source authenticity,
+security certification, production readiness, or a blanket truth guarantee.
