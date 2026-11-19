@@ -1,17 +1,13 @@
-DPP-AUDIT RELEASE CANDIDATE — LOCAL BASELINE
-============================================
-Environment: Python 3.12-compatible source; executed with installed Pydantic 2.x.
-Command: python -m unittest discover -s tests -v
-Result: PASS — 21 tests, 0 failures.
+DPP-AUDIT DETERMINISTIC-FIRST FREEZE CANDIDATE — TEST STATUS
+============================================================
 
-Command: python demo.py
-Result: PASS — synthetic example evaluated and JSON, CSV, and human-readable report generated.
-Overall status from synthetic demo: approved.
+Status for this assembled output copy: NOT RUN during assembly.
 
-Command: python -m compileall -q dpp_audit demo.py tests
-Result: PASS — no syntax/bytecode compilation errors.
+The package includes the original engine tests, hardening regression tests mapped
+to C1-C14 and R1-R9, and scripts/verify_hardening.py. Run the commands in README.md
+from this folder. The verifier runs the full suite and checks the demo's three
+output files.
 
-Scope warning: these are local baseline checks only. The Perplexity adapter tests use a
-recorded response and injected transport; no live API request was made. The demo uses
-synthetic evidence and example.invalid. Passing tests do not establish source authenticity,
-security certification, production readiness, or a blanket truth guarantee.
+Older test-result notes from the source candidate do not establish the result for
+this assembled copy. No test pass, production readiness, or freeze decision is
+claimed here.

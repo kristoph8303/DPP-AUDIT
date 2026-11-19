@@ -1,62 +1,56 @@
-# DPP-AUDIT — full-repository audit candidate
+# DPP-AUDIT — deterministic-first freeze candidate
 
-**Status: audit candidate, not frozen and not production-certified.** This repository combines the stricter deterministic engine candidate, compatible exports/reporting, a working synthetic demo, and a separate Perplexity source-discovery adapter.
+**Status: review candidate only. It is not frozen, production-ready, or independently certified.** This package uses the source-backed hardened 1.1.0 candidate as its base. The exact 1.2.0-pre-freeze source and tests were not recoverable from the referenced chat or available workspaces, so the three-way source comparison is incomplete; see [candidate comparison](docs/CANDIDATE_COMPARISON.md).
 
-## What it does
+## What is included
 
-- Evaluates structured policy/rule/input/evidence/assessment records deterministically.
-- Records an explicit evaluation date, policy/rule traceability, audit trail, and SHA-256 input fingerprint.
-- Distinguishes `APPROVED`, `REJECTED`, `REVIEW_REQUIRED`, and `INDETERMINATE`.
-- Exports a JSON validation record, CSV rule ledger, and human-readable report.
-- Uses Perplexity only to discover **candidate sources**. Candidate results are marked `candidate_unverified`; they do not become accepted evidence or assessments automatically.
-- Includes tests for the engine and adapter with a recorded provider response; tests do not require a live Perplexity API call.
+- A deterministic policy/evidence engine with separate evidence and assessment records.
+- Policy lifecycle and publication-eligibility reporting, manual-review decisions, conflict handling, source and requirement scoping, input fingerprints, and audit exports.
+- An isolated Perplexity discovery adapter. Its results remain unverified candidates and do not authorize decisions.
+- Regression tests mapped to all 23 supplied findings (C1–C14 and R1–R9).
+- A synthetic demo that writes `output/audit.csv`, `output/human_report.txt`, and `output/validation_run.json`.
 
-## Important limits
+`APPROVED` means only that the configured rules passed on the supplied records. It is not a guarantee that a claim is true or that a source is authentic.
 
-This is not yet a complete customer-facing document-ingestion or claim-extraction service. The engine does not itself authenticate a website, verify that a passage supports a claim, prove a source is authoritative, or replace human/expert review. Quality scores and assessment records are only as trustworthy as the trusted process that creates and authorizes them. Do not treat `APPROVED` as a blanket truth guarantee.
+## Run it on Windows
 
-The assessor allowlist must be controlled by trusted application configuration. Do not accept arbitrary policy, evidence, assessment, or assessor-authorization records directly from an untrusted client or AI worker.
+Open PowerShell in this folder and run:
 
-## Run locally
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe scripts\verify_hardening.py
+.\.venv\Scripts\python.exe demo.py
+Get-ChildItem output\audit.csv, output\human_report.txt, output\validation_run.json
+```
 
-Python 3.12 recommended.
+The first test command prints individual tests. The hardening verifier runs the suite again, prints a C1–C14/R1–R9 coverage table, and checks the demo in a temporary directory for exactly the three named files.
+
+## Run it on macOS or Linux
 
 ```bash
-python -m venv .venv
-# Windows: .venv\\Scripts\\activate
-# macOS/Linux: source .venv/bin/activate
+python3 -m venv .venv
+. .venv/bin/activate
 python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
+python scripts/verify_hardening.py
 python demo.py
+ls output/audit.csv output/human_report.txt output/validation_run.json
 ```
 
-The demo writes `output/validation_run.json`, `output/audit.csv`, and `output/human_report.txt`. Its data and URL are synthetic and intentionally use `example.invalid`.
+The demo uses synthetic data and `example.invalid`; it makes no live source-verification claim. The regression suite does not make a live Perplexity request.
 
-## Perplexity adapter setup
+## Review notes and limits
 
-Set `PERPLEXITY_API_KEY` in your local environment or deployment secret store. Do not paste the key into source code, commit it, or put it in test fixtures. The adapter reads the variable automatically:
+- [Candidate comparison and selection](docs/CANDIDATE_COMPARISON.md)
+- [Source inventory](docs/SOURCE_INVENTORY.md)
+- [Hardening finding-to-test map](docs/HARDENING_MATRIX.md)
+- [Unresolved limitations](docs/LIMITATIONS.md)
+- [Test status for this assembled copy](TEST_RESULTS.txt)
 
-```bash
-# macOS/Linux shell example
-export PERPLEXITY_API_KEY="your-key"
-python -c 'from dpp_audit.perplexity_adapter import discover_sources; print(discover_sources("Find primary sources for [claim]"))'
-```
+The 1.2.0 source gap must be closed before claiming that this package incorporates a verified three-way comparison. Passing the included tests would still not establish production readiness or source authenticity.
 
-The adapter calls Perplexity's chat completions endpoint. A live call incurs API use and is intentionally not part of automated tests. Every result remains an unverified candidate until a separate review/verification process records a supported assessment.
+## Optional Perplexity use
 
-## Repository layout
-
-- `dpp_audit/engine.py` — deterministic evaluator and exports
-- `dpp_audit/perplexity_adapter.py` — isolated provider adapter and normalizer
-- `tests/test_engine.py` — engine regression/adversarial tests
-- `tests/test_perplexity_adapter.py` — recorded-response adapter tests
-- `demo.py` — end-to-end synthetic example
-- `.github/workflows/tests.yml` — CI test workflow
-
-## Copilot / independent review request
-
-Review and test the **entire repository as one system**, not just individual files. Try to break it. Do not make changes yet; first return findings with file/line references, reproduction steps, severity, expected behavior, actual behavior, and suggested fixes. Prioritize security/trust-boundary failures, incorrect decisions, inconsistent statuses, traceability/fingerprint weaknesses, malformed inputs, data leakage, API failures/timeouts/rate limits, and missing end-to-end coverage. Clearly separate confirmed defects from risks and recommendations. Run the test suite and demo, add adversarial tests in a separate proposed patch or branch only after reporting baseline results, and do not claim source authentication or production readiness based only on passing tests.
-
-## Release gate
-
-Do not tag this as `v1.0.0` until an independent review is resolved, the final tests pass from a clean checkout, API behavior and error handling are checked, and the operator workflow has been exercised end-to-end.
+Only when you choose to make a live request, set `PERPLEXITY_API_KEY` in your private environment. Never place the key in source code, fixtures, or Git. A live request sends the search query to the provider and may incur charges.
