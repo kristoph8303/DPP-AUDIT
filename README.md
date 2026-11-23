@@ -53,7 +53,7 @@ The 1.2.0 source gap must be closed before claiming that this package incorporat
 
 ## Customer intake UI preview
 
-The UI prototype demonstrates the intended Backed Claims customer flow: add material, view a preliminary copy with possible claim locations marked, then see that the full audit is up for human review. Claim colors identify subject type only; they do not grade the writing. Review language describes how sources relate to the wording, rather than judging the writer.
+The UI prototype demonstrates the intended Backed Claims customer flow: add material, view a Quick Claims Sheet (an early map of possible claim passages), then see that the full audit is up for human review. The sheet does not promise the final audit's scope or a verified verdict. Claim colors identify subject type only; they do not grade the writing. Review language describes how sources relate to the wording, rather than judging the writer.
 
 Open ui/index.html in a browser. The preview has no server or external font dependency.
 
