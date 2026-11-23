@@ -51,6 +51,14 @@ The demo uses synthetic data and `example.invalid`; it makes no live source-veri
 
 The 1.2.0 source gap must be closed before claiming that this package incorporates a verified three-way comparison. Passing the included tests would still not establish production readiness or source authenticity.
 
+## Customer intake UI preview
+
+The UI prototype demonstrates the intended Backed Claims customer flow: add material, view a preliminary copy with possible claim locations marked, then see that the full audit is up for human review. Claim colors identify subject type only; they do not grade the writing. Review language describes how sources relate to the wording, rather than judging the writer.
+
+Open ui/index.html in a browser. The preview has no server or external font dependency.
+
+This is a local, front-end prototype. It does not upload or store customer material, check sources, extract PDF text, create a human-review queue, or send a completed audit. The sample scanner uses simple text patterns and can miss or misclassify claims. Its “Up for human review” label demonstrates the proposed experience only; it is not a real submission receipt.
+
 ## Optional Perplexity use
 
 Only when you choose to make a live request, set `PERPLEXITY_API_KEY` in your private environment. Never place the key in source code, fixtures, or Git. A live request sends the search query to the provider and may incur charges.

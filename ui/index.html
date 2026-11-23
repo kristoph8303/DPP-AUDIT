@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f5">
+  <title>Backed Claims — keep your story credible</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Backed Claims home">
+      <span class="brand-mark" aria-hidden="true">bc</span>
+      <span class="brand-name">backed<span>claims</span></span>
+    </a>
+    <div class="header-note"><span class="status-dot"></span> Customer preview <span class="prototype-tag">prototype</span></div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">A clearer way to check the details</p>
+      <h1 id="hero-title">Keep your story.<br><em>Make every claim count.</em></h1>
+      <p class="hero-copy">Add your material and get a preliminary copy with potential factual claims marked in place. A human reviewer checks the evidence before the full audit is shared.</p>
+    </section>
+
+    <section class="steps" aria-label="What happens">
+      <div class="step"><span class="step-number">01</span><span>Add your material</span></div>
+      <span class="step-line" aria-hidden="true"></span>
+      <div class="step"><span class="step-number">02</span><span>See a flagged copy</span></div>
+      <span class="step-line" aria-hidden="true"></span>
+      <div class="step"><span class="step-number">03</span><span>Human review follows</span></div>
+    </section>
+
+    <section id="intake" class="intake-card" aria-labelledby="intake-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Start with your draft</p>
+          <h2 id="intake-title">What would you like us to look at?</h2>
+        </div>
+        <span class="read-time">Private preview</span>
+      </div>
+      <label class="field-label" for="sourceText">Paste text</label>
+      <textarea id="sourceText" rows="8" placeholder="Paste a passage, article, report, or other material here…"></textarea>
+      <div class="input-footer">
+        <label class="file-button" for="fileInput">
+          <span aria-hidden="true">＋</span> Choose a text file
+          <input id="fileInput" type="file" accept=".txt,.md,.csv,.pdf,text/plain,text/markdown,text/csv,application/pdf">
+        </label>
+        <span id="fileName" class="file-name">TXT, MD, CSV or PDF</span>
+        <button id="sampleButton" class="text-button" type="button">Try a sample</button>
+      </div>
+      <p id="fileMessage" class="file-message" role="status"></p>
+      <div class="form-bottom">
+        <p class="privacy-note"><span class="lock-icon" aria-hidden="true">◇</span> This preview runs in your browser. Your text is not uploaded or stored.</p>
+        <button id="previewButton" class="primary-button" type="button">Preview my flagged copy <span aria-hidden="true">→</span></button>
+      </div>
+      <p id="inputError" class="input-error" role="alert" hidden>Please add some text before continuing.</p>
+      <p class="prototype-note">Demo limits: the preview marks possible factual claims using simple text patterns. It does not verify sources, extract PDF text, or create a real review request. For this demo, paste text copied from a PDF.</p>
+    </section>
+
+    <section id="preview" class="preview-section" aria-labelledby="preview-title" hidden>
+      <div class="ready-banner">
+        <div class="ready-icon" aria-hidden="true">✓</div>
+        <div class="ready-copy">
+          <p class="eyebrow">Your preliminary copy is ready</p>
+          <h2 id="preview-title">We’ve marked passages for a closer look.</h2>
+          <p>The flags point to wording and evidence to review. They are not grades, and they do not say anything about you as a writer.</p>
+        </div>
+        <span class="preliminary-pill">Preliminary</span>
+      </div>
+
+      <div class="review-state">
+        <div class="review-symbol" aria-hidden="true">↗</div>
+        <div>
+          <p class="review-label">Next step</p>
+          <p class="review-title">Up for human review</p>
+          <p class="review-description">A reviewer checks the evidence and suggested wording before the full audit is shared. In this prototype, the queue is a preview only; nothing has been submitted to a reviewer.</p>
+        </div>
+        <p class="review-reassurance">You don’t need to do anything now.</p>
+      </div>
+
+      <div class="preview-toolbar">
+        <div>
+          <p class="eyebrow">Your original copy</p>
+          <h2>Flagged claims <span id="claimCount" class="count-pill">0</span></h2>
+          <p class="toolbar-copy">Your wording stays intact. Select a flag to see what it means and a possible next step.</p>
+        </div>
+        <div class="legend" aria-label="Flag color shows claim type">
+          <span class="legend-swatch"></span> Color identifies claim type
+        </div>
+      </div>
+
+      <div class="preview-grid">
+        <article class="document-card" aria-labelledby="document-title">
+          <div class="document-topline">
+            <span class="document-icon" aria-hidden="true">▤</span>
+            <div><h3 id="document-title">Your material</h3><p>Original wording · read only</p></div>
+            <span class="read-only-tag">Read only</span>
+          </div>
+          <div id="annotatedCopy" class="annotated-copy"></div>
+          <p id="noClaims" class="no-claims" hidden>No possible factual claims were marked by this preview. Automated checks can miss claims, so this does not mean the material has been fully checked.</p>
+        </article>
+
+        <aside class="claim-panel" aria-labelledby="ledger-title">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Review map</p><h3 id="ledger-title">Claim ledger</h3></div>
+            <span class="panel-count" id="panelCount">0</span>
+          </div>
+          <div class="ledger-header" aria-hidden="true"><span>TYPE</span><span>STATUS</span></div>
+          <div id="claimList" class="claim-list"></div>
+        </aside>
+      </div>
+
+      <section id="claimDetail" class="claim-detail" aria-live="polite" aria-labelledby="detailTitle" hidden></section>
+
+      <p class="closing-note"><span class="closing-mark" aria-hidden="true">✳</span> You keep writing the things you want people to read. We’ll help check that the details hold up.</p>
+      <p class="demo-disclaimer">This local prototype has not checked sources and has not placed your material in a real review queue. No full audit or final verdict has been produced.</p>
+    </section>
+
+    <footer class="site-footer"><span>BACKED CLAIMS</span><span>Clear writing. Careful evidence.</span></footer>
+  </main>
+</body>
+</html>
