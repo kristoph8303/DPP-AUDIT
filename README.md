@@ -57,7 +57,7 @@ The UI prototype demonstrates the intended Backed Claims customer flow: add mate
 
 Open ui/index.html in a browser. The preview has no server or external font dependency.
 
-This is a local, front-end prototype. It does not upload or store customer material, check sources, extract PDF text, create a human-review queue, or send a completed audit. The sample scanner uses simple text patterns and can miss or misclassify claims. Its “Up for human review” label demonstrates the proposed experience only; it is not a real submission receipt.
+This is a local, front-end prototype. It does not upload or store customer material, check sources, extract PDF text, create a human-review queue, or send a completed audit. The sample scanner uses simple text patterns and can miss or misclassify claims. Its “Up for human review” label demonstrates the proposed experience only; it is not a real submission receipt. The tone cards show the same Eiffel Tower fact in four styles with subtle CSS scene motion. A selected tone stays in the current page only and is not applied to the submitted material.
 
 ## Optional Perplexity use
 

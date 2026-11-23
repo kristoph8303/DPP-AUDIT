@@ -27,7 +27,7 @@
     <section class="steps" aria-label="What happens">
       <div class="step"><span class="step-number">01</span><span>Add your material</span></div>
       <span class="step-line" aria-hidden="true"></span>
-      <div class="step"><span class="step-number">02</span><span>See a flagged copy</span></div>
+      <div class="step"><span class="step-number">02</span><span>See your Quick Claims Sheet</span></div>
       <span class="step-line" aria-hidden="true"></span>
       <div class="step"><span class="step-number">03</span><span>Human review follows</span></div>
     </section>
@@ -53,7 +53,7 @@
       <p id="fileMessage" class="file-message" role="status"></p>
       <div class="form-bottom">
         <p class="privacy-note"><span class="lock-icon" aria-hidden="true">◇</span> This preview runs in your browser. Your text is not uploaded or stored.</p>
-        <button id="previewButton" class="primary-button" type="button">Preview my flagged copy <span aria-hidden="true">→</span></button>
+        <button id="previewButton" class="primary-button" type="button">Preview my Quick Claims Sheet <span aria-hidden="true">→</span></button>
       </div>
       <p id="inputError" class="input-error" role="alert" hidden>Please add some text before continuing.</p>
       <p class="prototype-note">Demo limits: the preview marks possible factual claims using simple text patterns. It does not verify sources, extract PDF text, or create a real review request. For this demo, paste text copied from a PDF.</p>
@@ -77,7 +77,7 @@
           <p class="review-title">Up for human review</p>
           <p class="review-description">A reviewer checks the evidence and suggested wording before the full audit is shared. In this prototype, the queue is a preview only; nothing has been submitted to a reviewer.</p>
         </div>
-        <p class="review-reassurance">You don’t need to do anything now.</p>
+        <p class="review-reassurance">Tone choice is optional.</p>
       </div>
 
       <div class="preview-toolbar">
@@ -113,6 +113,82 @@
       </div>
 
       <section id="claimDetail" class="claim-detail" aria-live="polite" aria-labelledby="detailTitle" hidden></section>
+
+      <section class="tone-section" aria-labelledby="tone-title">
+        <div class="tone-heading">
+          <div>
+            <p class="eyebrow">Same claim · different voice</p>
+            <h2 id="tone-title">See how tone can change the feel.</h2>
+            <p>Each scene keeps the Eiffel Tower and the same core fact. Only the writing voice and atmosphere shift.</p>
+          </div>
+          <span class="tone-motion-note"><span aria-hidden="true">✦</span> Subtle motion</span>
+        </div>
+
+        <div class="tone-grid">
+          <article class="tone-card">
+            <div class="tone-scene scene-clear" aria-hidden="true">
+              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-cloud cloud-two"></span>
+              <span class="scene-horizon"></span>
+              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
+              <span class="scene-caption">A clear morning</span>
+            </div>
+            <div class="tone-card-body">
+              <div class="tone-card-title"><h3>Clear &amp; professional</h3><span class="tone-index">01</span></div>
+              <p class="tone-description">Direct, polished, and easy to scan.</p>
+              <p class="tone-example">“The Eiffel Tower’s structure was completed in 1889.”</p>
+              <button class="tone-select" type="button" data-tone="Clear &amp; professional" aria-pressed="false">Choose this tone</button>
+            </div>
+          </article>
+
+          <article class="tone-card">
+            <div class="tone-scene scene-warm" aria-hidden="true">
+              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-kite"></span><span class="kite-string"></span>
+              <span class="scene-horizon"></span>
+              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
+              <span class="scene-caption">A kite in the breeze</span>
+            </div>
+            <div class="tone-card-body">
+              <div class="tone-card-title"><h3>Warm &amp; conversational</h3><span class="tone-index">02</span></div>
+              <p class="tone-description">Relaxed and approachable.</p>
+              <p class="tone-example">“By 1889, the Eiffel Tower’s structure was complete.”</p>
+              <button class="tone-select" type="button" data-tone="Warm &amp; conversational" aria-pressed="false">Choose this tone</button>
+            </div>
+          </article>
+
+          <article class="tone-card">
+            <div class="tone-scene scene-confident" aria-hidden="true">
+              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-cloud cloud-two"></span>
+              <span class="scene-horizon"></span>
+              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
+              <span class="scene-caption">Late-day light</span>
+            </div>
+            <div class="tone-card-body">
+              <div class="tone-card-title"><h3>Confident &amp; concise</h3><span class="tone-index">03</span></div>
+              <p class="tone-description">Short, assured, and focused.</p>
+              <p class="tone-example">“The Eiffel Tower’s structure was complete in 1889.”</p>
+              <button class="tone-select" type="button" data-tone="Confident &amp; concise" aria-pressed="false">Choose this tone</button>
+            </div>
+          </article>
+
+          <article class="tone-card">
+            <div class="tone-scene scene-measured" aria-hidden="true">
+              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-cloud cloud-two"></span>
+              <span class="rain-streak rain-one"></span><span class="rain-streak rain-two"></span><span class="rain-streak rain-three"></span>
+              <span class="scene-horizon"></span>
+              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
+              <span class="scene-caption">A quieter sky</span>
+            </div>
+            <div class="tone-card-body">
+              <div class="tone-card-title"><h3>Thoughtful &amp; measured</h3><span class="tone-index">04</span></div>
+              <p class="tone-description">Considered, calm, and precise.</p>
+              <p class="tone-example">“In 1889, the Eiffel Tower’s structure was complete.”</p>
+              <button class="tone-select" type="button" data-tone="Thoughtful &amp; measured" aria-pressed="false">Choose this tone</button>
+            </div>
+          </article>
+        </div>
+        <p id="toneFeedback" class="tone-feedback" role="status">Optional: choose a preferred voice for a later copy. The examples keep the same core fact; your tone choice does not change claim findings or evidence standards.</p>
+        <p class="tone-prototype-note">These are sample rewrites for comparison. This prototype records your choice only in this page; it does not apply the tone to your material or submit a review request.</p>
+      </section>
 
       <p class="closing-note"><span class="closing-mark" aria-hidden="true">✳</span> You keep writing the things you want people to read. We’ll help check that the details hold up.</p>
       <p class="demo-disclaimer">This local prototype has not checked sources and has not placed your material in a real review queue. No full audit or final verdict has been produced.</p>

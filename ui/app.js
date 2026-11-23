@@ -14,6 +14,7 @@
   const claimCount = document.getElementById("claimCount");
   const panelCount = document.getElementById("panelCount");
   const noClaims = document.getElementById("noClaims");
+  const toneFeedback = document.getElementById("toneFeedback");
   let claims = [];
 
   const classes = {
@@ -209,5 +210,18 @@
     claimDetail.hidden = true;
     preview.hidden = false;
     preview.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.querySelectorAll(".tone-select").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const tone = button.dataset.tone;
+      document.querySelectorAll(".tone-select").forEach(function (choice) {
+        const selected = choice === button;
+        choice.setAttribute("aria-pressed", selected ? "true" : "false");
+        choice.textContent = selected ? "Selected for later copy" : "Choose this tone";
+        choice.closest(".tone-card").classList.toggle("is-selected", selected);
+      });
+      toneFeedback.textContent = "You chose " + tone + " for a later copy. The selected style does not change claim findings or evidence standards. This prototype does not save the choice or submit a review request.";
+    });
   });
 })();
