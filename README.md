@@ -53,11 +53,23 @@ The 1.2.0 source gap must be closed before claiming that this package incorporat
 
 ## Customer intake UI preview
 
-The UI prototype demonstrates the intended Backed Claims customer flow: add material, view a Quick Claims Sheet (an early map of possible claim passages), then see that the full audit is up for human review. The sheet does not promise the final audit's scope or a verified verdict. Claim colors identify subject type only; they do not grade the writing. Review language describes how sources relate to the wording, rather than judging the writer.
+The product handoff requirements are recorded in [the BackedClaims MVP specification](docs/BACKEDCLAIMS_MVP_SPEC.md).
 
-Open ui/index.html in a browser. The preview has no server or external font dependency.
+The UI prototype demonstrates the intended BackedClaims service flow: submit material, view a Preliminary Claim Map (also called the Quick Claims Sheet), then wait for the operator's human review and completed audit. The map does not promise the final audit's scope or a verified verdict. Claim colors identify subject type only; they do not grade the writing. See the [MVP handoff specification](docs/BACKEDCLAIMS_MVP_SPEC.md) for the claim taxonomy, evidence statuses, and review rules.
 
-This is a local, front-end prototype. It does not upload or store customer material, check sources, extract PDF text, create a human-review queue, or send a completed audit. The sample scanner uses simple text patterns and can miss or misclassify claims. Its “Up for human review” label demonstrates the proposed experience only; it is not a real submission receipt. The tone cards show the same Eiffel Tower fact in four styles with subtle CSS scene motion. A selected tone stays in the current page only and is not applied to the submitted material.
+Open `ui/index.html` for the customer intake and Preliminary Claim Map preview. Open `ui/operator.html` for the operator workspace mockup with Topic Generator and Claim Extractor flip-pages. In PowerShell from the repository root, run either command separately:
+
+```powershell
+Start-Process .\ui\index.html
+```
+
+```powershell
+Start-Process .\ui\operator.html
+```
+
+The previews have no server or external font dependency.
+
+These are local, front-end prototypes. They do not upload or store customer material, check sources, extract PDF, DOCX, or ZIP content, create a human-review queue, or send a completed audit. The customer preview can read pasted text and TXT, MD, or CSV files; its sample scanner uses simple text patterns and can miss or misclassify claims. It labels findings “Not assessed” because it performs no source search. The operator Topic Generator produces template prompts only, and the Claim Extractor is not connected to source search or review storage. Neither page is secured for public deployment.
 
 ## Optional Perplexity use
 

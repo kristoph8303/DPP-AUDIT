@@ -14,23 +14,20 @@
   const claimCount = document.getElementById("claimCount");
   const panelCount = document.getElementById("panelCount");
   const noClaims = document.getElementById("noClaims");
-  const toneFeedback = document.getElementById("toneFeedback");
+  const dropZone = document.getElementById("dropZone");
   let claims = [];
 
   const classes = {
-    "Financial": "financial",
+    "Financial / Economic": "financial",
     "Statistical": "statistical",
     "Historical": "historical",
-    "Scientific": "scientific",
-    "Medical / Health": "medical",
+    "Scientific / Technical": "scientific",
+    "Health / Medical": "health",
     "Legal / Regulatory": "legal",
-    "Technical": "technical",
-    "Business / Market": "business",
-    "Geographic / Demographic": "geographic",
-    "Attribution": "attribution",
-    "Comparative": "comparative",
-    "Causal": "causal",
-    "Other factual": "other"
+    "Product / Performance": "product",
+    "Attribution / Quotation": "attribution",
+    "General Factual": "general",
+    "Other Verifiable": "other"
   };
 
   function escapeHtml(value) {
@@ -41,20 +38,17 @@
 
   function classify(text) {
     const value = text.toLowerCase();
-    if (/[$€£]\s?\d|\b(revenue|profit|cost|price|valuation|budget|salary|worth)\b/.test(value)) return "Financial";
+    if (/[$€£]\s?\d|\b(revenue|profit|cost|price|valuation|budget|salary|worth|economic|inflation|gdp)\b/.test(value)) return "Financial / Economic";
     if (/\b(percent|percentage|rate|average|increased by|decreased by|grew by|fell by)\b|%|\b\d+(?:\.\d+)?\s?(?:million|billion|thousand)\b/.test(value)) return "Statistical";
-    if (/\b(causes?|caused|leads? to|resulted in|contributes? to|because of)\b/.test(value)) return "Causal";
-    if (/\b(faster|slower|larger|smaller|higher|lower|cheaper|more than|less than|compared with|compared to)\b/.test(value)) return "Comparative";
-    if (/\b(treats?|treatment|patients?|health|medical|disease|risk|mortality|clinical|medicine)\b/.test(value)) return "Medical / Health";
+    if (/\b(treats?|treatment|patients?|health|medical|disease|risk|mortality|clinical|medicine|symptom|diagnosis)\b/.test(value)) return "Health / Medical";
     if (/\b(law|legal|regulation|regulated|compliance|statute|requirement|court|rights)\b/.test(value)) return "Legal / Regulatory";
-    if (/\b(software|hardware|specification|processor|algorithm|protocol|technology|technical|supports? .*version)\b/.test(value)) return "Technical";
-    if (/\b(company|companies|business|market|industry|customers?|sales|shareholders?|startup)\b/.test(value)) return "Business / Market";
-    if (/\b(population|residents?|located|region|city|country|geographic|demographic|kilometers?|miles)\b/.test(value)) return "Geographic / Demographic";
-    if (/\b(said|stated|reported|according to|announced|wrote|testified)\b/.test(value)) return "Attribution";
-    if (/\b(study|research|experiment|scientists?|scientific|measured|observed|sample size)\b/.test(value)) return "Scientific";
+    if (/\b(software|hardware|specification|processor|algorithm|protocol|technology|technical|study|research|experiment|scientists?|scientific|measured|observed|sample size)\b/.test(value)) return "Scientific / Technical";
+    if (/\b(product|device|model|performance|battery|speed|durability|efficiency|faster|slower|larger|smaller|higher|lower|cheaper|compared with|compared to)\b/.test(value)) return "Product / Performance";
+    if (/\b(said|stated|reported|according to|announced|wrote|testified|quote|quoted|quotation)\b/.test(value)) return "Attribution / Quotation";
     if (/\b(19\d{2}|20\d{2}|18\d{2}|in \d{3,4}|on (?:january|february|march|april|may|june|july|august|september|october|november|december))\b/.test(value)) return "Historical";
     if (/\b\d+(?:\.\d+)?\b/.test(value)) return "Statistical";
-    return "Other factual";
+    if (/\b(is|are|was|were|has|have|had|will|causes?|caused|leads? to|resulted in|contributes? to|because of|located|contains?|includes?)\b/i.test(value)) return "General Factual";
+    return "Other Verifiable";
   }
 
   function seemsFactual(text) {
@@ -82,7 +76,7 @@
             start: start,
             end: end,
             type: classify(claimText),
-            status: "Needs deeper investigation"
+            status: "Not assessed · no source search"
           });
         }
       }
@@ -144,12 +138,12 @@
       '<div class="detail-heading"><div><span class="detail-id">' + escapeHtml(claim.id) +
       ' · <span class="' + typeClass(claim) + '"><span class="type-tag">' + escapeHtml(claim.type) +
       '</span></span></span><h3 id="detailTitle">A claim to review</h3></div>' +
-      '<span class="neutral-status">Needs deeper investigation</span></div>' +
+      '<span class="neutral-status">Not assessed</span></div>' +
       '<div class="detail-grid">' +
       '<div class="detail-block"><h4>What</h4><p>“' + escapeHtml(claim.text) + '”</p></div>' +
       '<div class="detail-block"><h4>Why</h4><p>This preview identified wording that may be a factual claim. It has not checked a source, so we do not yet know whether the evidence supports, conflicts with, or simply does not address it.</p></div>' +
       '<div class="detail-block"><h4>Suggested next step</h4><p>' + escapeHtml(suggestion) + '</p></div></div>' +
-      '<div class="source-note"><span aria-hidden="true">↳</span><span><strong>Evidence checked:</strong> none in this local preview. A real review should cite the relevant passage and explain whether it supports, conflicts with, or does not substantiate the wording.</span></div>';
+      '<div class="source-note"><span aria-hidden="true">↳</span><span><strong>Evidence checked:</strong> none. This prototype has not searched sources, so this is not a Source Needed finding or a verdict. A real review records the sources searched and whether they support, contest, or do not resolve the wording.</span></div>';
     claimDetail.hidden = false;
     document.querySelectorAll("[data-claim-id]").forEach(function (element) {
       const selected = element.dataset.claimId === claim.id;
@@ -167,33 +161,52 @@
     if (target) selectClaim(target.dataset.claimId);
   });
 
-  document.getElementById("sampleButton").addEventListener("click", function () {
-    sourceText.value = sample;
-    fileName.textContent = "Sample material";
-    fileMessage.textContent = "Example text loaded. It stays in this browser.";
-    inputError.hidden = true;
-    sourceText.focus();
-  });
-
-  fileInput.addEventListener("change", function () {
-    const file = fileInput.files && fileInput.files[0];
-    if (!file) return;
-    fileName.textContent = file.name;
-    if (/\.pdf$/i.test(file.name) || file.type === "application/pdf") {
-      fileMessage.textContent = "PDF text extraction is not connected in this prototype. Please copy the PDF text into the box above.";
-      fileInput.value = "";
+  function loadFiles(fileList) {
+    const files = Array.from(fileList || []);
+    if (!files.length) return;
+    fileName.textContent = files.map(function (file) { return file.name; }).join(" · ");
+    const textFiles = files.filter(function (file) { return /\.(txt|md|csv)$/i.test(file.name); });
+    const unsupported = files.filter(function (file) { return !/\.(txt|md|csv)$/i.test(file.name); });
+    if (!textFiles.length) {
+      sourceText.value = "";
+      fileMessage.textContent = "The page shows your selected files, but this prototype can read only TXT, MD, and CSV. PDF, DOCX, and ZIP need the secure intake service.";
       return;
     }
-    const reader = new FileReader();
-    reader.onload = function () {
-      sourceText.value = String(reader.result || "");
-      fileMessage.textContent = "Text loaded locally. Nothing has been uploaded.";
+    Promise.all(textFiles.map(function (file) {
+      return new Promise(function (resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = function () { resolve({ name: file.name, text: String(reader.result || "") }); };
+        reader.onerror = reject;
+        reader.readAsText(file);
+      });
+    })).then(function (loaded) {
+      sourceText.value = loaded.map(function (item) { return "--- " + item.name + " ---\n" + item.text; }).join("\n\n");
+      const extra = unsupported.length ? " Other file types are listed but not opened by this prototype." : "";
+      fileMessage.textContent = "Text loaded in this browser; nothing has been uploaded." + extra;
       inputError.hidden = true;
-    };
-    reader.onerror = function () {
-      fileMessage.textContent = "That file could not be read. Try pasting the text instead.";
-    };
-    reader.readAsText(file);
+    }).catch(function () {
+      fileMessage.textContent = "A text file could not be read. Try pasting the text instead.";
+    });
+  }
+
+  fileInput.addEventListener("change", function () {
+    loadFiles(fileInput.files);
+  });
+
+  ["dragenter", "dragover"].forEach(function (eventName) {
+    dropZone.addEventListener(eventName, function (event) {
+      event.preventDefault();
+      dropZone.classList.add("is-dragging");
+    });
+  });
+  ["dragleave", "dragend", "drop"].forEach(function (eventName) {
+    dropZone.addEventListener(eventName, function (event) {
+      event.preventDefault();
+      dropZone.classList.remove("is-dragging");
+    });
+  });
+  dropZone.addEventListener("drop", function (event) {
+    loadFiles(event.dataTransfer.files);
   });
 
   document.getElementById("previewButton").addEventListener("click", function () {
@@ -212,16 +225,7 @@
     preview.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
-  document.querySelectorAll(".tone-select").forEach(function (button) {
-    button.addEventListener("click", function () {
-      const tone = button.dataset.tone;
-      document.querySelectorAll(".tone-select").forEach(function (choice) {
-        const selected = choice === button;
-        choice.setAttribute("aria-pressed", selected ? "true" : "false");
-        choice.textContent = selected ? "Selected for later copy" : "Choose this tone";
-        choice.closest(".tone-card").classList.toggle("is-selected", selected);
-      });
-      toneFeedback.textContent = "You chose " + tone + " for a later copy. The selected style does not change claim findings or evidence standards. This prototype does not save the choice or submit a review request.";
-    });
+  document.getElementById("printPreview").addEventListener("click", function () {
+    window.print();
   });
 })();

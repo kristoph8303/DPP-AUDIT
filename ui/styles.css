@@ -51,6 +51,15 @@ h1 em { color: #557774; font-weight: 400; }
 textarea { width: 100%; min-height: 184px; resize: vertical; padding: 16px; border: 1px solid #dce4e1; border-radius: 9px; background: #fbfcfb; color: #273535; font-size: 14px; line-height: 1.72; }
 textarea::placeholder { color: #9aa5a2; }
 .input-footer { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.drop-zone { display: flex; align-items: center; gap: 13px; min-height: 78px; margin-top: 12px; padding: 15px 17px; border: 1px dashed #bccbc5; border-radius: 9px; background: #fbfcfb; color: #53635f; transition: border-color .15s, background .15s; }
+.drop-zone.is-dragging { border-color: #547d73; background: #eff5f2; }
+.drop-zone .drop-icon { display: grid; width: 35px; height: 35px; place-items: center; border-radius: 50%; color: #56776d; background: #edf3f0; font-size: 20px; }
+.drop-zone strong, .drop-zone small { display: block; }
+.drop-zone strong { font-size: 11px; }
+.drop-zone small { margin-top: 4px; color: #87918e; font-size: 10px; }
+.drop-zone label { color: #426c68; font-weight: 700; cursor: pointer; }
+.drop-zone input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
+.file-name { margin: 7px 0 0; color: #889390; font-size: 10px; }
 .file-button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 11px; border: 1px solid #dce4e1; border-radius: 7px; color: #39514f; background: #fff; font-size: 11px; font-weight: 600; cursor: pointer; }
 .file-button:hover { border-color: #adbfba; background: #f8faf9; }
 .file-button input { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); }
@@ -58,6 +67,12 @@ textarea::placeholder { color: #9aa5a2; }
 .text-button { margin-left: auto; padding: 6px 0; border: 0; color: #426c68; background: transparent; font-size: 11px; font-weight: 600; cursor: pointer; }
 .text-button:hover { color: #183f3e; text-decoration: underline; }
 .file-message { min-height: 15px; margin: 7px 0 0; color: #697876; font-size: 11px; }
+.email-label { margin-top: 15px; }
+.source-supplement-label { margin-top: 15px; }
+.source-supplement { min-height: 86px; }
+.email-input { width: 100%; min-height: 42px; padding: 0 12px; border: 1px solid #dce4e1; border-radius: 8px; color: #273535; background: #fbfcfb; font: inherit; font-size: 13px; }
+.email-input:focus-visible { outline: 3px solid rgba(47,112,112,.32); outline-offset: 3px; }
+.email-note { margin: 6px 0 0; color: #87918f; font-size: 10px; line-height: 1.5; }
 .form-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 15px; padding-top: 17px; border-top: 1px solid #edf0ee; }
 .privacy-note { margin: 0; color: #697674; font-size: 10px; line-height: 1.6; }
 .lock-icon { margin-right: 5px; color: #54756d; font-size: 14px; }
@@ -123,6 +138,10 @@ textarea::placeholder { color: #9aa5a2; }
 .detail-block p { margin: 0; color: #3d4b48; font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; }
 .source-note { display: flex; align-items: flex-start; gap: 8px; margin-top: 16px; padding: 11px 13px; border-radius: 8px; color: #64716e; background: #f3f5f4; font-size: 10px; line-height: 1.55; }
 .source-note strong { color: #445652; }
+.preview-actions { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 18px; padding: 14px 16px; border: 1px solid #e0e6e3; border-radius: 9px; background: #f9fbfa; }
+.preview-actions p { margin: 0; color: #63716d; font-size: 10px; line-height: 1.5; }
+.secondary-button { min-height: 34px; padding: 0 12px; border: 1px solid #d3dfda; border-radius: 6px; color: #45635b; background: #fff; font-size: 10px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.secondary-button:hover { background: #eff4f1; }
 .tone-section { margin-top: 48px; }
 .tone-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 17px; }
 .tone-heading h2 { margin: 0 0 6px; font-family: "DM Serif Display", Georgia, serif; font-size: 27px; font-weight: 400; letter-spacing: -.35px; }
@@ -191,14 +210,11 @@ textarea::placeholder { color: #9aa5a2; }
 .type-statistical { --type-color: #527a89; --type-wash: #eaf2f4; }
 .type-historical { --type-color: #547a73; --type-wash: #eaf1ed; }
 .type-scientific { --type-color: #5d7190; --type-wash: #edf0f6; }
-.type-medical { --type-color: #846d87; --type-wash: #f2edf3; }
+.type-health { --type-color: #846d87; --type-wash: #f2edf3; }
 .type-legal { --type-color: #697887; --type-wash: #edf0f2; }
-.type-technical { --type-color: #537d82; --type-wash: #eaf2f1; }
-.type-business { --type-color: #7d7357; --type-wash: #f3f0e7; }
-.type-geographic { --type-color: #5f8065; --type-wash: #edf3eb; }
+.type-product { --type-color: #537d82; --type-wash: #eaf2f1; }
 .type-attribution { --type-color: #786a88; --type-wash: #f1edf5; }
-.type-comparative { --type-color: #657d9a; --type-wash: #edf1f6; }
-.type-causal { --type-color: #8a6f65; --type-wash: #f4eeeb; }
+.type-general { --type-color: #5f8065; --type-wash: #edf3eb; }
 .type-other { --type-color: #6e7c78; --type-wash: #eef2f0; }
 [hidden] { display: none !important; }
 
@@ -234,7 +250,21 @@ textarea::placeholder { color: #9aa5a2; }
   .tone-grid { grid-template-columns: 1fr; }
   .tone-heading { flex-direction: column; }
   .tone-scene { height: 146px; }
+  .preview-actions { align-items: stretch; flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media print {
+  body { background: #fff; }
+  .site-header, .hero, .steps, #intake, .review-state, .preview-toolbar .legend, .claim-panel, .preview-actions button, .site-footer, .closing-note, .demo-disclaimer { display: none !important; }
+  main { width: 100%; margin: 0; }
+  #preview { display: block !important; margin: 0; }
+  .ready-banner { border: 0; box-shadow: none; }
+  .preview-grid { display: block; }
+  .document-card { border: 0; }
+  .annotated-copy { padding: 8px 0; color: #111; }
+  .claim-mark { background: transparent; }
+  .inline-flag { border: 0; }
+  .claim-detail:not([hidden]) { break-inside: avoid; box-shadow: none; }
 }

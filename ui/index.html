@@ -14,58 +14,62 @@
       <span class="brand-mark" aria-hidden="true">bc</span>
       <span class="brand-name">backed<span>claims</span></span>
     </a>
-    <div class="header-note"><span class="status-dot"></span> Customer preview <span class="prototype-tag">prototype</span></div>
+    <div class="header-note"><span class="status-dot"></span> Backed Claims review service <span class="prototype-tag">pilot preview</span></div>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">A clearer way to check the details</p>
-      <h1 id="hero-title">Keep your story.<br><em>Make every claim count.</em></h1>
-      <p class="hero-copy">Add your material and get a Quick Claims Sheet: an early map of potential factual claims that may be covered in the full audit. A human reviewer checks the evidence before the full audit is shared.</p>
+      <p class="eyebrow">A careful review, run by Kris</p>
+      <h1 id="hero-title">Send your material.<br><em>Get a clearer picture.</em></h1>
+      <p class="hero-copy">Send the material you want reviewed. BackedClaims prepares a preliminary map of possible factual claims; Kris reviews the evidence before sending your completed audit.</p>
     </section>
 
     <section class="steps" aria-label="What happens">
-      <div class="step"><span class="step-number">01</span><span>Add your material</span></div>
+      <div class="step"><span class="step-number">01</span><span>Send material</span></div>
       <span class="step-line" aria-hidden="true"></span>
-      <div class="step"><span class="step-number">02</span><span>See your Quick Claims Sheet</span></div>
+      <div class="step"><span class="step-number">02</span><span>Get a Preliminary Claim Map</span></div>
       <span class="step-line" aria-hidden="true"></span>
-      <div class="step"><span class="step-number">03</span><span>Human review follows</span></div>
+      <div class="step"><span class="step-number">03</span><span>Kris reviews and sends the full audit</span></div>
     </section>
 
     <section id="intake" class="intake-card" aria-labelledby="intake-title">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Start with your draft</p>
-          <h2 id="intake-title">What would you like us to look at?</h2>
+          <p class="eyebrow">Customer material intake</p>
+          <h2 id="intake-title">Send material for review</h2>
         </div>
         <span class="read-time">Private preview</span>
       </div>
-      <label class="field-label" for="sourceText">Paste text</label>
-      <textarea id="sourceText" rows="8" placeholder="Paste a passage, article, report, or other material here…"></textarea>
-      <div class="input-footer">
-        <label class="file-button" for="fileInput">
-          <span aria-hidden="true">＋</span> Choose a text file
-          <input id="fileInput" type="file" accept=".txt,.md,.csv,.pdf,text/plain,text/markdown,text/csv,application/pdf">
-        </label>
-        <span id="fileName" class="file-name">TXT, MD, CSV or PDF</span>
-        <button id="sampleButton" class="text-button" type="button">Try a sample</button>
+      <label class="field-label" for="sourceText">Paste content or enter one claim</label>
+      <textarea id="sourceText" rows="6" placeholder="Paste a draft, report, email, or a single claim…"></textarea>
+      <div id="dropZone" class="drop-zone" aria-label="Choose or drop files">
+        <span class="drop-icon" aria-hidden="true">↑</span>
+        <span><strong>Drop your files here</strong><small>or <label for="fileInput">browse files</label></small></span>
+        <input id="fileInput" type="file" multiple accept=".txt,.md,.csv,.pdf,.docx,.zip,text/plain,text/markdown,text/csv,application/pdf,application/zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
       </div>
+      <div id="fileName" class="file-name" aria-live="polite">PDF, DOCX, ZIP, TXT, MD, CSV</div>
       <p id="fileMessage" class="file-message" role="status"></p>
+      <label class="field-label source-supplement-label" for="customerSources">Sources you want considered (optional)</label>
+      <textarea id="customerSources" class="source-supplement" rows="3" placeholder="Paste source links or passages you think may help…"></textarea>
+      <p class="email-note">The live service will associate these sources with this audit. This local demo does not check or save them.</p>
+      <label class="field-label email-label" for="deliveryEmail">Email for completed audit delivery</label>
+      <input id="deliveryEmail" class="email-input" type="email" autocomplete="email" placeholder="you@example.com">
+      <p class="email-note">The live service uses this to deliver the completed audit. This local demo does not send or save it.</p>
       <div class="form-bottom">
-        <p class="privacy-note"><span class="lock-icon" aria-hidden="true">◇</span> This preview runs in your browser. Your text is not uploaded or stored.</p>
-        <button id="previewButton" class="primary-button" type="button">Preview my Quick Claims Sheet <span aria-hidden="true">→</span></button>
+        <p class="privacy-note"><span class="lock-icon" aria-hidden="true">◇</span> This prototype does not send or store your material. In the live service, Kris runs the review.</p>
+        <button id="previewButton" class="primary-button" type="button">Preview the claim map <span aria-hidden="true">→</span></button>
       </div>
       <p id="inputError" class="input-error" role="alert" hidden>Please add some text before continuing.</p>
-      <p class="prototype-note">Demo limits: the preview marks possible factual claims using simple text patterns. It does not verify sources, extract PDF text, or create a real review request. For this demo, paste text copied from a PDF.</p>
+      <p class="prototype-note">Local UI prototype only: text and CSV can be previewed with simple patterns. PDF, DOCX, and ZIP are shown as intake types but are not extracted or sent anywhere yet.</p>
     </section>
 
     <section id="preview" class="preview-section" aria-labelledby="preview-title" hidden>
       <div class="ready-banner">
         <div class="ready-icon" aria-hidden="true">✓</div>
         <div class="ready-copy">
-          <p class="eyebrow">Your Quick Claims Sheet is ready</p>
-          <h2 id="preview-title">An early map of claims that may be covered.</h2>
-          <p>These markings show what the first pass noticed. They are starting points for review—not a complete scope, source-checked finding, or grade of your writing.</p>
+          <p class="eyebrow">Preliminary Claim Map · Quick Claims Sheet</p>
+          <h2 id="preview-title">Your preliminary claim scan is complete.</h2>
+          <p>We've identified statements that may benefit from additional verification. Your findings will now undergo human review before your completed BackedClaims audit is returned.</p>
         </div>
         <span class="preliminary-pill">Preliminary</span>
       </div>
@@ -74,17 +78,17 @@
         <div class="review-symbol" aria-hidden="true">↗</div>
         <div>
           <p class="review-label">Next step</p>
-          <p class="review-title">Up for human review</p>
-          <p class="review-description">A reviewer checks the evidence and suggested wording before the full audit is shared. In this prototype, the queue is a preview only; nothing has been submitted to a reviewer.</p>
+          <p class="review-title">Awaiting human review</p>
+          <p class="review-description">In the intended service, Kris runs the audit and checks every flagged claim before sending the full report. This screen is a local demonstration; it does not create a real case.</p>
         </div>
-        <p class="review-reassurance">Tone choice is optional.</p>
+        <p class="review-reassurance">Kris controls review timing.</p>
       </div>
 
       <div class="preview-toolbar">
         <div>
           <p class="eyebrow">Your original copy</p>
-          <h2>Quick Claims Sheet <span id="claimCount" class="count-pill">0</span></h2>
-          <p class="toolbar-copy">Your wording stays intact. Select a marked passage to see why it may be reviewed and a possible next step.</p>
+          <h2>Preliminary Claim Map <span id="claimCount" class="count-pill">0</span></h2>
+          <p class="toolbar-copy">Your original wording stays intact. Select a marker to see what was noticed and what may need review.</p>
         </div>
         <div class="legend" aria-label="Flag color shows claim type">
           <span class="legend-swatch"></span> Color identifies claim type
@@ -114,84 +118,13 @@
 
       <section id="claimDetail" class="claim-detail" aria-live="polite" aria-labelledby="detailTitle" hidden></section>
 
-      <section class="tone-section" aria-labelledby="tone-title">
-        <div class="tone-heading">
-          <div>
-            <p class="eyebrow">Same claim · different voice</p>
-            <h2 id="tone-title">See how tone can change the feel.</h2>
-            <p>Each scene keeps the Eiffel Tower and the same core fact. Only the writing voice and atmosphere shift.</p>
-          </div>
-          <span class="tone-motion-note"><span aria-hidden="true">✦</span> Subtle motion</span>
-        </div>
-
-        <div class="tone-grid">
-          <article class="tone-card">
-            <div class="tone-scene scene-clear" aria-hidden="true">
-              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-cloud cloud-two"></span>
-              <span class="scene-horizon"></span>
-              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
-              <span class="scene-caption">A clear morning</span>
-            </div>
-            <div class="tone-card-body">
-              <div class="tone-card-title"><h3>Clear &amp; professional</h3><span class="tone-index">01</span></div>
-              <p class="tone-description">Direct, polished, and easy to scan.</p>
-              <p class="tone-example">“The Eiffel Tower’s structure was completed in 1889.”</p>
-              <button class="tone-select" type="button" data-tone="Clear &amp; professional" aria-pressed="false">Choose this tone</button>
-            </div>
-          </article>
-
-          <article class="tone-card">
-            <div class="tone-scene scene-warm" aria-hidden="true">
-              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-kite"></span><span class="kite-string"></span>
-              <span class="scene-horizon"></span>
-              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
-              <span class="scene-caption">A kite in the breeze</span>
-            </div>
-            <div class="tone-card-body">
-              <div class="tone-card-title"><h3>Warm &amp; conversational</h3><span class="tone-index">02</span></div>
-              <p class="tone-description">Relaxed and approachable.</p>
-              <p class="tone-example">“By 1889, the Eiffel Tower’s structure was complete.”</p>
-              <button class="tone-select" type="button" data-tone="Warm &amp; conversational" aria-pressed="false">Choose this tone</button>
-            </div>
-          </article>
-
-          <article class="tone-card">
-            <div class="tone-scene scene-confident" aria-hidden="true">
-              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-cloud cloud-two"></span>
-              <span class="scene-horizon"></span>
-              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
-              <span class="scene-caption">Late-day light</span>
-            </div>
-            <div class="tone-card-body">
-              <div class="tone-card-title"><h3>Confident &amp; concise</h3><span class="tone-index">03</span></div>
-              <p class="tone-description">Short, assured, and focused.</p>
-              <p class="tone-example">“The Eiffel Tower’s structure was complete in 1889.”</p>
-              <button class="tone-select" type="button" data-tone="Confident &amp; concise" aria-pressed="false">Choose this tone</button>
-            </div>
-          </article>
-
-          <article class="tone-card">
-            <div class="tone-scene scene-measured" aria-hidden="true">
-              <span class="scene-sun"></span><span class="scene-cloud cloud-one"></span><span class="scene-cloud cloud-two"></span>
-              <span class="rain-streak rain-one"></span><span class="rain-streak rain-two"></span><span class="rain-streak rain-three"></span>
-              <span class="scene-horizon"></span>
-              <svg class="tower-art" viewBox="0 0 100 140" focusable="false"><path class="tower-fill" d="M44 8h12l3 18 12 18-7 5-9-10 5 18 17 34-8 5-12-9 11 40H32l11-40-12 9-8-5 17-34 5-18-9 10-7-5 12-18z"/><path class="tower-lines" d="M41 29h18M34 57h32M27 94h46M35 119h30M43 43l14 14M57 43 43 57M35 75l30 19M65 75 35 94"/></svg>
-              <span class="scene-caption">A quieter sky</span>
-            </div>
-            <div class="tone-card-body">
-              <div class="tone-card-title"><h3>Thoughtful &amp; measured</h3><span class="tone-index">04</span></div>
-              <p class="tone-description">Considered, calm, and precise.</p>
-              <p class="tone-example">“In 1889, the Eiffel Tower’s structure was complete.”</p>
-              <button class="tone-select" type="button" data-tone="Thoughtful &amp; measured" aria-pressed="false">Choose this tone</button>
-            </div>
-          </article>
-        </div>
-        <p id="toneFeedback" class="tone-feedback" role="status">Optional: choose a preferred voice for a later copy. The examples keep the same core fact; your tone choice does not change claim findings or evidence standards.</p>
-        <p class="tone-prototype-note">These are sample rewrites for comparison. This prototype records your choice only in this page; it does not apply the tone to your material or submit a review request.</p>
-      </section>
+      <div class="preview-actions">
+        <p>This preview is informational. Kris reviews claims and evidence before sending the full audit.</p>
+        <button id="printPreview" class="secondary-button" type="button">Print / save this preview</button>
+      </div>
 
       <p class="closing-note"><span class="closing-mark" aria-hidden="true">✳</span> You keep writing the things you want people to read. We’ll help check that the details hold up.</p>
-      <p class="demo-disclaimer">This local prototype has not checked sources and has not placed your material in a real review queue. No full audit or final verdict has been produced.</p>
+      <p class="demo-disclaimer">This local prototype has not sent or stored your material, checked sources, or created a real review case.</p>
     </section>
 
     <footer class="site-footer"><span>BACKED CLAIMS</span><span>Clear writing. Careful evidence.</span></footer>

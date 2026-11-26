@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132d30">
+  <title>Backed Claims — Operator Workbench</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="operator.css">
+  <script src="operator.js" defer></script>
+</head>
+<body class="operator-body">
+  <header class="operator-header">
+    <a class="operator-brand" href="index.html"><span class="operator-mark">bc</span><span>BACKED CLAIMS <small>OPERATOR WORKBENCH</small></span></a>
+    <div class="operator-status"><span class="operator-dot"></span> Local prototype <span class="operator-only">Not protected for deployment</span></div>
+  </header>
+
+  <main class="operator-main">
+    <section class="operator-intro">
+      <div><p class="operator-eyebrow">Your review desk</p><h1>One claim at a time.<br><em>Keep the whole story in view.</em></h1></div>
+      <p>Use the page tabs to set a topic or review extracted claim candidates. Source lookup, saving, and customer delivery are not connected in this local preview.</p>
+    </section>
+
+    <nav class="page-flips" aria-label="Operator work pages">
+      <button class="page-tab is-active" type="button" data-page="topicPage" aria-pressed="true"><span class="page-tab-no">01</span><span>Topic Generator</span><span class="page-turn-mark" aria-hidden="true">↷</span></button>
+      <button class="page-tab" type="button" data-page="claimsPage" aria-pressed="false"><span class="page-tab-no">02</span><span>Claim Extractor</span><span class="page-turn-mark" aria-hidden="true">↷</span></button>
+    </nav>
+
+    <div id="pageBook" class="page-book">
+      <section id="topicPage" class="work-page topic-page" aria-labelledby="topicHeading">
+        <div class="work-page-heading">
+          <div><p class="operator-eyebrow">Page 1 · Research scope</p><h2 id="topicHeading">Topic Generator</h2><p>Start with a topic to sketch the questions and source types the review may need.</p></div>
+          <span class="page-stamp">01 / 02</span>
+        </div>
+        <div class="topic-layout">
+          <div class="topic-input-card">
+            <label for="topicInput">Topic or subject</label>
+            <textarea id="topicInput" rows="5" placeholder="Example: Eiffel Tower completion and public opening dates"></textarea>
+            <div class="topic-controls">
+              <span class="local-note">Template suggestions · no live search</span>
+              <button id="generateTopics" class="work-button" type="button">Build topic brief <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+          <aside class="topic-brief">
+            <div class="brief-head"><span class="brief-icon" aria-hidden="true">✳</span><div><span class="operator-eyebrow">Research starting points</span><h3>Potential lines of inquiry</h3></div></div>
+            <ol id="topicSuggestions" class="topic-suggestions"><li>Enter a topic to see suggested questions.</li></ol>
+            <p class="operator-caveat">These are prompts for organizing a review. They are not sources and do not establish that a claim is true.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="claimsPage" class="work-page claims-page" aria-labelledby="claimsHeading" hidden>
+        <div class="work-page-heading">
+          <div><p class="operator-eyebrow">Page 2 · Claim review</p><h2 id="claimsHeading">Claim Extractor</h2><p>Load text, extract possible factual statements, and work through the numbered list.</p></div>
+          <span class="page-stamp">02 / 02</span>
+        </div>
+
+        <div id="operatorDropZone" class="operator-material-bar">
+          <label for="operatorSource">Material text</label>
+          <div class="operator-material-controls">
+            <label class="operator-file-button" for="operatorFile">Browse text file</label>
+            <input id="operatorFile" class="visually-hidden" type="file" accept=".txt,.md,.csv,text/plain,text/markdown,text/csv">
+            <span id="operatorFileName" class="operator-file-name">Drop here or browse · TXT, MD, CSV</span>
+            <button id="loadExample" class="operator-quiet-button" type="button">Load Eiffel example</button>
+            <button id="extractClaims" class="work-button" type="button">Extract claims <span aria-hidden="true">→</span></button>
+          </div>
+          <textarea id="operatorSource" rows="4" placeholder="Paste material or enter one claim…"></textarea>
+          <p class="operator-caveat">This local prototype uses simple text patterns; candidates are not verified claims.</p>
+        </div>
+
+        <div class="operator-work-grid">
+          <section class="operator-document" aria-labelledby="originalHeading">
+            <div class="operator-pane-head"><div><span class="operator-eyebrow">Original material</span><h3 id="originalHeading">Passages in context</h3></div><span class="read-only-badge">Source copy</span></div>
+            <div id="operatorCopy" class="operator-copy"><p class="empty-state">Load or paste material, then choose Extract claims.</p></div>
+          </section>
+
+          <aside class="operator-claims-panel" aria-labelledby="claimQueueHeading">
+            <div class="operator-pane-head queue-head"><div><span class="operator-eyebrow">Review checklist</span><h3 id="claimQueueHeading">Claim candidates <span id="operatorClaimCount" class="operator-count">0</span></h3></div><span id="reviewProgress" class="progress-label">0 / 0 checked</span></div>
+            <div id="operatorClaimList" class="operator-claim-list"><p class="empty-state">Your numbered claim list will appear here.</p></div>
+            <section id="operatorDetail" class="operator-detail" aria-live="polite" hidden></section>
+          </aside>
+        </div>
+
+        <div class="operator-bottom-note"><span aria-hidden="true">◇</span><span>“Checked” means you reviewed the candidate. Its evidence status remains separate and still needs source assessment.</span></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
